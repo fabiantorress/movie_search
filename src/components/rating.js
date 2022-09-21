@@ -6,11 +6,9 @@ import { FaStar } from "react-icons/fa";
 import { Box, Icon, Text } from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
 
-function Rating({rating, setRating}) {
-
+function Rating({ rating, setRating }) {
   const stars = Array.from({ length: 5 }).map((x, i) => {
-    const ratingValue = i + 1;
-
+    const ratingValue = (i + 1) * 2;
     return (
       <>
         <Icon

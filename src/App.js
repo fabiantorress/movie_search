@@ -5,7 +5,8 @@ import Header from "./components/header/header";
 import SearchBox from "./components/search-box/search-box";
 import * as axios from "axios";
 import MovieList from "./components/movie-list/movie-list";
-import  Rating  from "./components/rating";
+import Rating from "./components/rating";
+import FavouriteMovieList from "./components/favourite-movie-list";
 
 const API_KEY = "43e78140f686abd91b3bb952141d2651";
 const BASE_URL = "https://api.themoviedb.org/3";
@@ -14,10 +15,9 @@ function App() {
   const [movies, setMovies] = React.useState([]);
   const [query, setQuery] = React.useState("");
   const [filteredMovies, setFilteredMovies] = React.useState(movies);
-  const [status, setStatus] = React.useState("idle");
+  const [status, setStatus] = React.useState("loading");
 
   const [rating, setRating] = React.useState(0);
-
 
   const isLoading = status === "loading";
   const isResolved = status === "resolved";
@@ -81,7 +81,8 @@ function App() {
         flexDirection="column"
       >
         <Header />
-        <MovieList movies={query ? filteredMovies : movies} />
+        <MovieList movies={query ? filteredMovies : movies} rating={rating} />
+        <FavouriteMovieList />
       </Box>
       <Box width="20%" height="100vh" backgroundColor="gray.900">
         <SearchBox handlerChange={handlerChange} />

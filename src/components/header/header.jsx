@@ -7,6 +7,7 @@ const Text = styled.p({
   fontFamily: "Arial",
   fontSize: "md",
   marginLeft: "4%",
+  cursor: "pointer"
 });
 
 function Header() {
