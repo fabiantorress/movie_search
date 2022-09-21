@@ -5,6 +5,7 @@ import Header from "./components/header/header";
 import SearchBox from "./components/search-box/search-box";
 import * as axios from "axios";
 import MovieList from "./components/movie-list/movie-list";
+import  Rating  from "./components/rating";
 
 const API_KEY = "43e78140f686abd91b3bb952141d2651";
 const BASE_URL = "https://api.themoviedb.org/3";
@@ -14,6 +15,9 @@ function App() {
   const [query, setQuery] = React.useState("");
   const [filteredMovies, setFilteredMovies] = React.useState(movies);
   const [status, setStatus] = React.useState("idle");
+
+  const [rating, setRating] = React.useState(0);
+
 
   const isLoading = status === "loading";
   const isResolved = status === "resolved";
@@ -63,7 +67,7 @@ function App() {
   function handlerChange(event) {
     setTimeout(() => {
       setQuery(event.target.value);
-    }, 1000);
+    }, 2000);
   }
 
   return (
@@ -81,6 +85,7 @@ function App() {
       </Box>
       <Box width="20%" height="100vh" backgroundColor="gray.900">
         <SearchBox handlerChange={handlerChange} />
+        <Rating rating={rating} setRating={setRating} />
       </Box>
     </Box>
   );

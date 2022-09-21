@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Box } from "@chakra-ui/react";
 import styled from "@emotion/styled/macro";
-import { formatDate } from "../../utils/misc";
 
 const TitleText = styled.h1({
   justifyContent: "left",
@@ -66,7 +65,7 @@ function MovieList({ movies }) {
             >
               <Box display="flex" flexDirection="column" height="350px">
                 <TitleText>{movie.title}</TitleText>
-                <DateText>{formatDate(new Date(movie.release_date))}</DateText>
+                <DateText>{movie.release_date}</DateText>
               </Box>
             </Box>
           ))
