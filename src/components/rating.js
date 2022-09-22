@@ -24,7 +24,9 @@ function Rating({ rating, setRating }) {
           }}
           // https://stackoverflow.com/questions/1817792/is-there-a-previous-sibling-selector
           color={rating >= ratingValue ? "yellow" : "gray"}
-          onClick={() => setRating(ratingValue)}
+          onClick={() => {
+            setRating(ratingValue);
+          }}
         />
       </>
     );

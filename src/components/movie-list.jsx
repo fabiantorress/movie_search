@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Text } from "@chakra-ui/react";
-import CardMovie from "../card-movie";
-import CardMovieContainer from "../card-movie-container";
+import CardMovie from "./card-movie";
+import CardMovieContainer from "./card-movie-container";
 
 function MovieList({ movies, rating }) {
   if (movies) {
