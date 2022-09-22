@@ -1,12 +1,13 @@
 import "./App.css";
 import * as React from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import Header from "./components/header/header";
 import SearchBox from "./components/search-box/search-box";
 import * as axios from "axios";
 import MovieList from "./components/movie-list/movie-list";
 import Rating from "./components/rating";
 import FavouriteMovieList from "./components/favourite-movie-list";
+import { useFavouriteMovie } from "./components/context/favourite-movie.context";
 
 const API_KEY = "43e78140f686abd91b3bb952141d2651";
 const BASE_URL = "https://api.themoviedb.org/3";
@@ -22,6 +23,8 @@ function App() {
   const isLoading = status === "loading";
   const isResolved = status === "resolved";
   const isRejected = status === "rejected";
+
+  const { favouriteMovies } = useFavouriteMovie();
 
   React.useEffect(() => {
     async function getMovies() {
@@ -51,7 +54,6 @@ function App() {
             },
           })
           .then((response) => {
-            console.log(response.data.results);
             setFilteredMovies(response.data.results);
             setStatus("resolved");
           })
@@ -81,7 +83,27 @@ function App() {
         flexDirection="column"
       >
         <Header />
+        <Text
+          color="white"
+          fontFamily="fantasy"
+          fontSize="30px"
+          marginLeft="4%"
+          marginBottom="10px"
+        >
+          Trending Movies
+        </Text>
         <MovieList movies={query ? filteredMovies : movies} rating={rating} />
+        {favouriteMovies.length !== 0 ? (
+          <Text
+            color="white"
+            fontFamily="fantasy"
+            fontSize="30px"
+            marginLeft="4%"
+            marginBottom="10px"
+          >
+            Bookmarked
+          </Text>
+        ) : null}
         <FavouriteMovieList />
       </Box>
       <Box width="20%" height="100vh" backgroundColor="gray.900">

@@ -6,10 +6,11 @@ const CardMovieContainer = ({ children }) => {
     <Box
       height="350px"
       marginBottom="40px"
+      marginLeft="40px"
       display="flex"
       flex="none"
       scrollSnapType="x mandatory"
-      overflowX="scroll"
+      overflowX="auto"
       overflowY="hidden"
       css={{
         "&::-webkit-scrollbar": {
