@@ -38,7 +38,7 @@ function TItleAndIconModel({ title, iconComponent }) {
 
 function MenuBar() {
   return (
-    <Box display="flex" flexDirection="column" margin="100px 30px 0px 30px">
+    <Box display="flex" flexDirection="column" margin="60px 30px 0px 30px">
       <Box display="flex" flexDirection="column">
         <Text color="gray" fontSize="large" marginBottom="15px">
           MENU
