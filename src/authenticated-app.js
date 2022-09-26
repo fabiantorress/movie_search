@@ -5,8 +5,9 @@ import SearchBox from "./components/search-box";
 import Rating from "./components/rating";
 import MenuBar from "./components/menu-bar";
 import { Routes, Route, useParams, Link } from "react-router-dom";
-import Home from "./screens/movies";
+import Movies from "./screens/movies";
 import useAsync from "./utils/hooks";
+import FavouriteMovieList from "./components/favourite-movie-list";
 
 function AuthenticatedApp() {
   const [rating, setRating] = React.useState(0);
@@ -16,7 +17,7 @@ function AuthenticatedApp() {
   function AppRoutes() {
     return (
       <Routes>
-        <Route path="/" element={<Home query={query} rating={rating} />} />
+        <Route path="/" element={<Movies query={query} rating={rating} />} />
       </Routes>
     );
   }
@@ -30,11 +31,11 @@ function AuthenticatedApp() {
 
   return (
     <Box display="flex" flexDirection="row">
-      <Box width="15%" height="container.xl" backgroundColor="gray.900">
+      <Box width="20%" height="container.xl" backgroundColor="gray.900">
         <MenuBar />
       </Box>
       <Box
-        width="70%"
+        width="60%"
         height="container.xl"
         bg="black"
         display="flex"
@@ -45,9 +46,10 @@ function AuthenticatedApp() {
           <AppRoutes />
         </main>
       </Box>
-      <Box width="15%" height="container.xl" backgroundColor="gray.900">
+      <Box width="20%" height="container.xl" backgroundColor="gray.900">
         <SearchBox handlerChange={handlerChange} />
         <Rating rating={rating} setRating={setRating} />
+        <FavouriteMovieList />
       </Box>
     </Box>
   );

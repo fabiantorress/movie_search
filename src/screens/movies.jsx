@@ -2,22 +2,20 @@ import * as React from "react";
 import { Text } from "@chakra-ui/react";
 import * as axios from "axios";
 import MovieList from "../components/movie-list";
-import FavouriteMovieList from "../components/favourite-movie-list";
-import { useFavouriteMovie } from "../components/context/favourite-movie.context";
 import useAsync from "../utils/hooks";
+import TopRatedMovies from "../components/top-rated-movies";
 
 const API_KEY = "43e78140f686abd91b3bb952141d2651";
 const BASE_URL = "https://api.themoviedb.org/3";
 
-function Home({ query, rating }) {
+function Movies({ query, rating }) {
   const [movies, setMovies] = React.useState([]);
+  const [topRatedMovies, setTopRatedMovies] = React.useState([]);
   const [filteredMovies, setFilteredMovies] = React.useState(movies);
   const { setStatus, isLoadind, isResolved, isRejected } = useAsync();
 
-  const { favouriteMovies } = useFavouriteMovie();
-
   React.useEffect(() => {
-    async function getMovies() {
+    async function getTrendingMovies() {
       setStatus("loading");
       await axios
         .get(`${BASE_URL}/discover/movie`, {
@@ -32,7 +30,7 @@ function Home({ query, rating }) {
           console.log(error.message);
         });
     }
-    getMovies();
+    getTrendingMovies();
   }, [setStatus]);
 
   React.useEffect(() => {
@@ -57,7 +55,23 @@ function Home({ query, rating }) {
       }
     }
     getFilteredMovies();
-  }, [query]);
+  }, [query, setStatus]);
+
+  React.useEffect(() => {
+    async function getTopRatedMovies() {
+      setStatus("loading");
+      await axios
+        .get(`${BASE_URL}/movie/top_rated`, {
+          params: { api_key: API_KEY },
+        })
+        .then((response) => {
+          setTopRatedMovies(response.data.results);
+          console.log(response.data.results);
+        })
+        .catch((error) => console.log(error.message));
+    }
+    getTopRatedMovies();
+  }, [setStatus]);
 
   return (
     <>
@@ -71,19 +85,17 @@ function Home({ query, rating }) {
         Trending Movies
       </Text>
       <MovieList movies={query ? filteredMovies : movies} rating={rating} />
-      {favouriteMovies.length !== 0 ? (
-        <Text
-          color="white"
-          fontFamily="fantasy"
-          fontSize="30px"
-          marginLeft="4%"
-          marginBottom="10px"
-        >
-          Bookmarked
-        </Text>
-      ) : null}
-      <FavouriteMovieList />
+      <Text
+        color="white"
+        fontFamily="fantasy"
+        fontSize="30px"
+        marginLeft="4%"
+        marginBottom="10px"
+      >
+        Top Rated
+      </Text>
+      <TopRatedMovies topRatedMovies={topRatedMovies} />
     </>
   );
 }
-export default Home;
+export default Movies;
