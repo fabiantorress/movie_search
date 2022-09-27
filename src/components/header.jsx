@@ -42,8 +42,8 @@ function Header() {
       alignItems="center"
     >
       <NavLink to="/">Movies</NavLink>
-      <NavLink to="">Series</NavLink>
-      <NavLink to="">TV Shows</NavLink>
+      <NavLink to="/series">Series</NavLink>
+      <NavLink to="/tvshows">TV Shows</NavLink>
     </Box>
   );
 }

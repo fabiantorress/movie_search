@@ -6,8 +6,8 @@ import Rating from "./components/rating";
 import MenuBar from "./components/menu-bar";
 import { Routes, Route, useParams, Link } from "react-router-dom";
 import Movies from "./screens/movies";
-import { useAsync } from "./components/context/status.context.js";
 import FavouriteMovieList from "./components/favourite-movie-list";
+import NotFoundScreen from "./screens/not-found";
 
 function AuthenticatedApp() {
   const [rating, setRating] = React.useState(0);
@@ -17,6 +17,7 @@ function AuthenticatedApp() {
     return (
       <Routes>
         <Route path="/" element={<Movies query={query} rating={rating} />} />
+        <Route path="*" element={<NotFoundScreen />} />
       </Routes>
     );
   }
@@ -40,7 +41,9 @@ function AuthenticatedApp() {
         flexDirection="column"
       >
         <Header />
-        <main width="100%"><AppRoutes /></main>
+        <main width="100%">
+          <AppRoutes />
+        </main>
       </Box>
       <Box width="20%" height="container.xl" backgroundColor="gray.900">
         <SearchBox handlerChange={handlerChange} />
