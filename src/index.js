@@ -6,16 +6,19 @@ import reportWebVitals from "./reportWebVitals";
 import { ChakraProvider } from "@chakra-ui/react";
 import { FavouriteMovieProvider } from "./components/context/favourite-movie.context";
 import { BrowserRouter as Router } from "react-router-dom";
+import { StatusProvider } from "./components/context/status.context.js";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ChakraProvider>
-      <FavouriteMovieProvider>
-        <Router>
-          <App />
-        </Router>
-      </FavouriteMovieProvider>
+      <StatusProvider>
+        <FavouriteMovieProvider>
+          <Router>
+            <App />
+          </Router>
+        </FavouriteMovieProvider>
+      </StatusProvider>
     </ChakraProvider>
   </React.StrictMode>
 );

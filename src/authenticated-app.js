@@ -6,13 +6,12 @@ import Rating from "./components/rating";
 import MenuBar from "./components/menu-bar";
 import { Routes, Route, useParams, Link } from "react-router-dom";
 import Movies from "./screens/movies";
-import useAsync from "./utils/hooks";
+import { useAsync } from "./components/context/status.context.js";
 import FavouriteMovieList from "./components/favourite-movie-list";
 
 function AuthenticatedApp() {
   const [rating, setRating] = React.useState(0);
   const [query, setQuery] = React.useState("");
-  const {setStatus} = useAsync()
 
   function AppRoutes() {
     return (
@@ -23,7 +22,6 @@ function AuthenticatedApp() {
   }
 
   function handlerChange(event) {
-    setStatus("loading")
     setTimeout(() => {
       setQuery(event.target.value);
     }, 2000);
@@ -42,9 +40,7 @@ function AuthenticatedApp() {
         flexDirection="column"
       >
         <Header />
-        <main width="100%">
-          <AppRoutes />
-        </main>
+        <main width="100%"><AppRoutes /></main>
       </Box>
       <Box width="20%" height="container.xl" backgroundColor="gray.900">
         <SearchBox handlerChange={handlerChange} />
